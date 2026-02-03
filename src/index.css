@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-coral: #d97757;
+  --color-charcoal: #1a1a1a;
+  --color-warm-gray: #3d3d3d;
+  --color-cream: #faf8f5;
+  --color-teal: #4a9b8c;
+  --color-teal-light: #7bc4b5;
+  --color-text-muted: #b8b8b8;
+
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Playfair Display", serif;
+}
+
 body {
   margin: 0;
   min-height: 100vh;

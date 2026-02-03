@@ -6,7 +6,7 @@ React 19 workshop/presentation. TypeScript, Vite, Tailwind CSS v4, Framer Motion
 
 ```bash
 bun dev       # Dev server
-bun build     # Production build
+bun run build # Production build
 bun preview   # Preview production build
 bun check:fix # Typecheck + lint + format (with fixes)
 bun check     # Typecheck + lint + format (read-only)

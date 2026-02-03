@@ -23,5 +23,11 @@
       "trailingCommas": "all",
       "semicolons": "always"
     }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true,
+      "tailwindDirectives": true
+    }
   }
 }

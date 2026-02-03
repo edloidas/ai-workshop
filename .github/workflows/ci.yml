@@ -36,4 +36,4 @@ jobs:
         run: bun format:check
 
       - name: Build
-        run: bun build
+        run: bun run build

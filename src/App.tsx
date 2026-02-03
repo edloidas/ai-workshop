@@ -1,54 +1,90 @@
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import Slide from './components/Slide';
+import { useCallback, useState } from 'react';
+import { NavDots } from './components/NavDots';
+import { ProgressBar } from './components/ProgressBar';
+import { SlideCounter } from './components/SlideCounter';
+import { ContentSlide } from './components/slides/ContentSlide';
+import { CoverSlide } from './components/slides/CoverSlide';
+import { SectionSlide } from './components/slides/SectionSlide';
+import { useSlideNavigation } from './hooks/useSlideNavigation';
 
-const slides = [
+type SlideData =
+  | { id: number; type: 'cover'; title: string; subtitle?: string }
+  | { id: number; type: 'section'; number: string; title: string }
+  | { id: number; type: 'content'; title: string; content: string };
+
+const slides: SlideData[] = [
+  { id: 1, type: 'cover', title: 'AI Agents', subtitle: 'for Developers' },
+  { id: 2, type: 'section', number: '01', title: 'Foundations' },
   {
-    id: 1,
-    title: 'Welcome',
-    content: 'AI Workshop - Interactive Presentation',
+    id: 3,
+    type: 'content',
+    title: 'Tokens & Context',
+    content: 'Understanding the building blocks of AI language models.',
   },
-  { id: 2, title: 'Introduction', content: 'Getting started with AI' },
-  { id: 3, title: 'Summary', content: 'Thank you!' },
+  { id: 4, type: 'section', number: '02', title: 'Tools & APIs' },
+  {
+    id: 5,
+    type: 'content',
+    title: 'Function Calling',
+    content: 'How AI agents interact with external systems.',
+  },
+  { id: 6, type: 'section', number: '03', title: 'Building Agents' },
+  {
+    id: 7,
+    type: 'content',
+    title: 'Agent Architecture',
+    content: 'Designing robust and reliable AI agents.',
+  },
 ];
+
+function renderSlide(slide: SlideData) {
+  switch (slide.type) {
+    case 'cover':
+      return <CoverSlide key={slide.id} title={slide.title} subtitle={slide.subtitle} />;
+    case 'section':
+      return <SectionSlide key={slide.id} number={slide.number} title={slide.title} />;
+    case 'content':
+      return (
+        <ContentSlide key={slide.id} title={slide.title}>
+          {slide.content}
+        </ContentSlide>
+      );
+  }
+}
 
 export default function App() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+  const handleNext = useCallback(() => {
+    setCurrentSlide((prev) => Math.min(prev + 1, slides.length - 1));
+  }, []);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  const handlePrev = useCallback(() => {
+    setCurrentSlide((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  const handleGoTo = useCallback((index: number) => {
+    setCurrentSlide(index);
+  }, []);
+
+  useSlideNavigation({
+    currentSlide,
+    totalSlides: slides.length,
+    onNext: handleNext,
+    onPrev: handlePrev,
+    onGoTo: handleGoTo,
+  });
 
   return (
-    <div className="relative flex h-screen w-screen items-center justify-center overflow-hidden bg-linear-to-br from-slate-900 to-slate-800">
-      <AnimatePresence mode="wait">
-        <Slide key={slides[currentSlide].id} slide={slides[currentSlide]} />
-      </AnimatePresence>
+    <div className="relative h-screen w-screen overflow-hidden bg-charcoal">
+      <AnimatePresence mode="wait">{renderSlide(slides[currentSlide])}</AnimatePresence>
 
-      <div className="absolute bottom-8 flex gap-4">
-        <button
-          type="button"
-          onClick={prevSlide}
-          className="rounded-lg bg-white/10 px-6 py-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
-        >
-          Previous
-        </button>
-        <button
-          type="button"
-          onClick={nextSlide}
-          className="rounded-lg bg-white/10 px-6 py-2 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
-        >
-          Next
-        </button>
-      </div>
+      <NavDots current={currentSlide} total={slides.length} onNavigate={handleGoTo} />
 
-      <div className="absolute bottom-8 right-8 text-white/50">
-        {currentSlide + 1} / {slides.length}
-      </div>
+      <SlideCounter current={currentSlide} total={slides.length} />
+
+      <ProgressBar current={currentSlide} total={slides.length} />
     </div>
   );
 }

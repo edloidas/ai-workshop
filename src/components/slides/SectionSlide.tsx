@@ -16,7 +16,7 @@ export function SectionSlide({ number, title }: SectionSlideProps) {
     >
       <div className="text-center">
         <motion.span
-          className="font-mono text-6xl font-medium text-coral"
+          className="font-mono text-6xl font-medium text-accent"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.07, duration: 0.35 }}
@@ -24,7 +24,7 @@ export function SectionSlide({ number, title }: SectionSlideProps) {
           {number}
         </motion.span>
         <motion.h2
-          className="mt-4 font-display text-6xl font-semibold text-cream"
+          className="mt-4 font-display text-6xl font-semibold text-main"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.17, duration: 0.35 }}

@@ -11,7 +11,7 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
   return (
     <div className="fixed inset-x-0 bottom-0 h-[2px] bg-warm-gray">
       <motion.div
-        className="h-full bg-coral"
+        className="h-full bg-accent"
         initial={{ width: 0 }}
         animate={{ width: `${progress}%` }}
         transition={{ duration: 0.2, ease: 'easeOut' }}

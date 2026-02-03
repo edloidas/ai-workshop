@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import type { ReactNode } from 'react';
+import {motion} from 'framer-motion';
+import type {ReactNode} from 'react';
 
 interface ContentSlideProps {
   title: string;
@@ -16,7 +16,7 @@ export function ContentSlide({ title, children }: ContentSlideProps) {
       className="flex h-full w-full flex-col bg-charcoal px-24 py-16"
     >
       <motion.h2
-        className="font-sans text-5xl font-semibold text-cream"
+        className="font-sans text-5xl font-semibold text-main"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.07, duration: 0.35 }}
@@ -24,7 +24,7 @@ export function ContentSlide({ title, children }: ContentSlideProps) {
         {title}
       </motion.h2>
       <motion.div
-        className="mt-12 flex-1 font-sans text-2xl leading-relaxed text-text-muted"
+        className="mt-12 flex-1 font-sans text-2xl leading-relaxed text-muted"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.17, duration: 0.35 }}

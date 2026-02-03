@@ -1,12 +1,12 @@
-import { AnimatePresence } from 'framer-motion';
-import { useCallback, useState } from 'react';
-import { NavDots } from './components/NavDots';
-import { ProgressBar } from './components/ProgressBar';
-import { SlideCounter } from './components/SlideCounter';
-import { ContentSlide } from './components/slides/ContentSlide';
-import { CoverSlide } from './components/slides/CoverSlide';
-import { SectionSlide } from './components/slides/SectionSlide';
-import { useSlideNavigation } from './hooks/useSlideNavigation';
+import {AnimatePresence} from 'framer-motion';
+import {useCallback, useState} from 'react';
+import {NavDots} from './components/NavDots';
+import {ProgressBar} from './components/ProgressBar';
+import {SlideCounter} from './components/SlideCounter';
+import {ContentSlide} from './components/slides/ContentSlide';
+import {CoverSlide} from './components/slides/CoverSlide';
+import {SectionSlide} from './components/slides/SectionSlide';
+import {useSlideNavigation} from './hooks/useSlideNavigation';
 
 type SlideData =
   | { id: number; type: 'cover'; title: string; subtitle?: string }

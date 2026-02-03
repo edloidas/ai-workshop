@@ -1,6 +1,6 @@
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import {ShaderCanvas} from '../ShaderCanvas';
+import { ShaderCanvas } from '../ShaderCanvas';
 
 interface CoverSlideProps {
   title: string;
@@ -70,7 +70,9 @@ export function CoverSlide({ title, subtitle }: CoverSlideProps) {
           },
         }}
       >
-        <p className="font-mono text-sm uppercase tracking-wide text-main cursor-default">← keys →</p>
+        <p className="font-mono text-sm uppercase tracking-wide text-main cursor-default">
+          ← keys →
+        </p>
       </motion.div>
     </motion.div>
   );

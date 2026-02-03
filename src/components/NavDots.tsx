@@ -16,7 +16,7 @@ export function NavDots({ current, total, onNavigate }: NavDotsProps) {
             key={dotId}
             type="button"
             onClick={() => onNavigate(index)}
-            className="group relative flex h-2 w-2 items-center justify-center"
+            className="group relative flex h-2 w-2 items-center justify-center outline-none cursor-pointer"
             aria-label={`Go to slide ${index + 1}`}
           >
             <motion.div
@@ -30,7 +30,7 @@ export function NavDots({ current, total, onNavigate }: NavDotsProps) {
                 scale: 1.5,
                 backgroundColor: current === index ? '#D97757' : '#7BC4B5',
               }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.1 }}
             />
           </button>
         );

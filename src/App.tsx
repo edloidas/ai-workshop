@@ -1,14 +1,16 @@
-import { AnimatePresence } from 'framer-motion';
-import { useCallback, useState } from 'react';
-import { NavDots } from './components/NavDots';
-import { ProgressBar } from './components/ProgressBar';
-import { SlideCounter } from './components/SlideCounter';
-import { ContentSlide } from './components/slides/ContentSlide';
-import { CoverSlide } from './components/slides/CoverSlide';
-import { LLMDemoSlide } from './components/slides/LLMDemoSlide';
-import { SectionSlide } from './components/slides/SectionSlide';
-import { TokenizerSlide } from './components/slides/TokenizerSlide';
-import { useSlideNavigation } from './hooks/useSlideNavigation';
+import {AnimatePresence} from 'framer-motion';
+import {useCallback, useState} from 'react';
+import {NavDots} from './components/NavDots';
+import {ProgressBar} from './components/ProgressBar';
+import {SlideCounter} from './components/SlideCounter';
+import {ContentSlide} from './components/slides/ContentSlide';
+import {ContextGraphSlide} from './components/slides/ContextGraphSlide';
+import {CoverSlide} from './components/slides/CoverSlide';
+import {LLMDemoSlide} from './components/slides/LLMDemoSlide';
+import {LostMiddleSlide} from './components/slides/LostMiddleSlide';
+import {SectionSlide} from './components/slides/SectionSlide';
+import {TokenizerSlide} from './components/slides/TokenizerSlide';
+import {useSlideNavigation} from './hooks/useSlideNavigation';
 
 type ContentItem = string | string[];
 type SlideContent = string | ContentItem[];
@@ -25,7 +27,21 @@ type SlideData =
       sectionTitle?: string;
     }
   | { id: number; type: 'tokenizer'; title: string; sectionNumber?: string; sectionTitle?: string }
-  | { id: number; type: 'llm-demo'; title: string; sectionNumber?: string; sectionTitle?: string };
+  | { id: number; type: 'llm-demo'; title: string; sectionNumber?: string; sectionTitle?: string }
+  | {
+      id: number;
+      type: 'context-graph';
+      title: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'lost-middle';
+      title: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    };
 
 const slides: SlideData[] = [
   { id: 1, type: 'cover', title: 'AI Agents', subtitle: 'for Developers' },
@@ -85,23 +101,109 @@ const slides: SlideData[] = [
     id: 7,
     type: 'content',
     title: 'Key Takeaway',
-    content:
-      'LLMs are statistical pattern matchers — understanding this unlocks better prompting strategies.',
+    content: [
+      'LLMs are statistical pattern matchers — understanding this unlocks better prompting',
+      'Same prompt → different answers. Verify results through repeated generations',
+      'No *correct answer inside* — only probability distribution',
+    ],
     sectionNumber: '01',
     sectionTitle: 'Foundations',
   },
-  { id: 8, type: 'section', number: '02', title: 'Tools & APIs' },
+  { id: 8, type: 'section', number: '02', title: 'Context' },
   {
     id: 9,
+    type: 'context-graph',
+    title: 'Context Window Comparison',
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  {
+    id: 10,
+    type: 'content',
+    title: 'Context Window Basics',
+    content: [
+      [
+        '**Context window = everything the model "sees"**',
+        'Each API request sends the *full context* from scratch',
+        'Model has no memory between requests — complete reload every time',
+      ],
+      [
+        '**The Amnesia Analogy**',
+        'Imagine someone with complete amnesia reading their diary from page 1 every morning',
+        "They only 'remember' what's written, and only while reading",
+        'Tomorrow? Start from page 1 again',
+      ],
+      [
+        '**Cost Implications**',
+        'Long conversations = exponential cost growth',
+        '50 messages × 500 tokens = `25K tokens` per request by end',
+        'Prompt caching helps — cached tokens cost less, but you still pay for them',
+      ],
+    ],
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  {
+    id: 11,
+    type: 'lost-middle',
+    title: 'Lost in the Middle',
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  {
+    id: 12,
+    type: 'content',
+    title: 'Lost in the Middle',
+    content: [
+      [
+        '**System prompt at the beginning**',
+        'Critical instructions, persona definitions, and constraints go here',
+        'Models pay strongest attention to the start of context',
+      ],
+      [
+        '**Last message = highest weight**',
+        'Recent user input and assistant responses get priority',
+        'Use this for immediate task focus and clarifications',
+      ],
+      [
+        '**Middle = reference material zone**',
+        'RAG documents, conversation history, and examples often land here',
+        'Information can be *"lost"* — retrieval accuracy drops significantly',
+      ],
+    ],
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  {
+    id: 13,
+    type: 'content',
+    title: 'Mitigation Strategies',
+    content: [
+      [
+        '**Repeat critical instructions**',
+        'Place key constraints at both the beginning and end of long contexts',
+        'The *sandwich* approach ensures important rules are not forgotten',
+      ],
+      [
+        '**Newer models handle this better**',
+        'Claude 3+ and recent GPT models are trained specifically for long context retrieval',
+        'The *lost in the middle* effect is reduced, but not eliminated completely',
+      ],
+    ],
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  {
+    id: 14,
     type: 'content',
     title: 'Function Calling',
     content: 'How AI agents interact with external systems.',
     sectionNumber: '02',
-    sectionTitle: 'Tools & APIs',
+    sectionTitle: 'Context',
   },
-  { id: 10, type: 'section', number: '03', title: 'Building Agents' },
+  { id: 15, type: 'section', number: '03', title: 'Building Agents' },
   {
-    id: 11,
+    id: 16,
     type: 'content',
     title: 'Agent Architecture',
     content: 'Designing robust and reliable AI agents.',
@@ -139,6 +241,24 @@ function renderSlide(slide: SlideData) {
     case 'llm-demo':
       return (
         <LLMDemoSlide
+          key={slide.id}
+          title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'context-graph':
+      return (
+        <ContextGraphSlide
+          key={slide.id}
+          title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'lost-middle':
+      return (
+        <LostMiddleSlide
           key={slide.id}
           title={slide.title}
           sectionNumber={slide.sectionNumber}

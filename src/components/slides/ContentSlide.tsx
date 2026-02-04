@@ -1,5 +1,5 @@
-import {motion} from 'framer-motion';
-import type {ReactNode} from 'react';
+import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 
 type ContentItem = string | string[];
 type SlideContent = string | ContentItem[];
@@ -34,7 +34,11 @@ function parseInlineMarkdown(text: string): ReactNode {
       );
     } else if (match[3]) {
       // Italic: *text*
-      parts.push(<em key={match.index}>{match[4]}</em>);
+      parts.push(
+        <em key={match.index} className="italic font-display">
+          {match[4]}
+        </em>,
+      );
     } else if (match[5]) {
       // Code: `code`
       parts.push(

@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { NavDots } from './components/NavDots';
 import { ProgressBar } from './components/ProgressBar';
 import { SlideCounter } from './components/SlideCounter';
+import { AgentListSlide } from './components/slides/AgentListSlide';
 import { ContentSlide } from './components/slides/ContentSlide';
 import { ContextGraphSlide } from './components/slides/ContextGraphSlide';
 import { CoverSlide } from './components/slides/CoverSlide';
@@ -49,6 +50,13 @@ type SlideData =
       title: string;
       imageSrc: string;
       imageAlt?: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'agent-list';
+      title: string;
       sectionNumber?: string;
       sectionTitle?: string;
     };
@@ -295,6 +303,13 @@ const slides: SlideData[] = [
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },
+  {
+    id: 20,
+    type: 'agent-list',
+    title: 'Agents We Will Explore',
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
 ];
 
 function renderSlide(slide: SlideData) {
@@ -357,6 +372,15 @@ function renderSlide(slide: SlideData) {
           title={slide.title}
           imageSrc={slide.imageSrc}
           imageAlt={slide.imageAlt}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'agent-list':
+      return (
+        <AgentListSlide
+          key={slide.id}
+          title={slide.title}
           sectionNumber={slide.sectionNumber}
           sectionTitle={slide.sectionTitle}
         />

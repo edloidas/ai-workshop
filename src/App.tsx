@@ -11,6 +11,7 @@ import { ImageSlide } from './components/slides/ImageSlide';
 import { LLMDemoSlide } from './components/slides/LLMDemoSlide';
 import { LostMiddleSlide } from './components/slides/LostMiddleSlide';
 import { SectionSlide } from './components/slides/SectionSlide';
+import { SubscriptionValueSlide } from './components/slides/SubscriptionValueSlide';
 import { TokenizerSlide } from './components/slides/TokenizerSlide';
 import { useSlideNavigation } from './hooks/useSlideNavigation';
 
@@ -56,6 +57,13 @@ type SlideData =
   | {
       id: number;
       type: 'agent-list';
+      title: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'subscription-value';
       title: string;
       sectionNumber?: string;
       sectionTitle?: string;
@@ -330,13 +338,34 @@ const slides: SlideData[] = [
   },
   {
     id: 21,
+    type: 'content',
+    title: 'Why not Copilot?',
+    content: [
+      "Copilot works — but it's not best fit for agents",
+      [
+        '**Limited CLI support**',
+        "Only OpenCode integrates with Copilot's Subscription",
+        "Codex and Claude Code don't support it — locked to their own",
+      ],
+      [
+        '**Older models, slower updates**',
+        'Copilot Pro uses GPT-5.1 Codex — not the latest agentic reasoning models',
+        'Newer models like Opus 4.5 have stricter limits',
+      ],
+      ['**No unique value**', 'Everything Copilot offers is available through other subscriptions'],
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 22,
     type: 'agent-list',
     title: 'Agents We Will Explore',
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },
   {
-    id: 22,
+    id: 23,
     type: 'content',
     title: 'OpenAI Codex',
     content: [
@@ -360,7 +389,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Agents',
   },
   {
-    id: 23,
+    id: 24,
     type: 'content',
     title: 'Working with Codex',
     content: [
@@ -379,7 +408,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Agents',
   },
   {
-    id: 24,
+    id: 25,
     type: 'content',
     title: 'OpenCode',
     content: [
@@ -404,7 +433,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Agents',
   },
   {
-    id: 25,
+    id: 26,
     type: 'content',
     title: 'Claude Code',
     content: [
@@ -429,7 +458,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Agents',
   },
   {
-    id: 26,
+    id: 27,
     type: 'content',
     title: 'Working with Claude Code',
     content: [
@@ -449,6 +478,21 @@ const slides: SlideData[] = [
         'One subscription covers chat, API credits, and agent usage',
       ],
     ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 28,
+    type: 'subscription-value',
+    title: 'Why Subscription?',
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 29,
+    type: 'image',
+    title: 'Questions?',
+    imageSrc: '/images/joke-claude.png',
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },
@@ -521,6 +565,15 @@ function renderSlide(slide: SlideData) {
     case 'agent-list':
       return (
         <AgentListSlide
+          key={slide.id}
+          title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'subscription-value':
+      return (
+        <SubscriptionValueSlide
           key={slide.id}
           title={slide.title}
           sectionNumber={slide.sectionNumber}

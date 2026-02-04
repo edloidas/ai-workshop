@@ -196,14 +196,49 @@ const slides: SlideData[] = [
   {
     id: 14,
     type: 'content',
-    title: 'Function Calling',
-    content: 'How AI agents interact with external systems.',
+    title: 'Context Rot',
+    content: [
+      'Long sessions → quality degradation',
+
+      [
+        '**Contradiction accumulation**',
+        'Conflicting instructions in history confuse the model',
+        'Earlier guidance gets diluted by later contradictions',
+      ],
+      [
+        '**Instruction dilution**',
+        'System prompt ratio shrinks: `2K` instructions vs `100K` dialogue tokens',
+        'Critical rules get drowned in conversation noise, style drifts',
+      ],
+      [
+        '**Compaction artifacts**',
+        'Auto-summarization near context limit loses details',
+        'Agents compress history, dropping nuances',
+      ],
+    ],
     sectionNumber: '02',
     sectionTitle: 'Context',
   },
-  { id: 15, type: 'section', number: '03', title: 'Building Agents' },
   {
-    id: 16,
+    id: 15,
+    type: 'content',
+    title: 'Fighting Context Rot',
+    content: [
+      [
+        '**New session for new task**',
+        "Don't continue feature B in feature A's session",
+        'Fresh context = fresh quality baseline',
+      ],
+      'Don\'t fear starting over — sometimes it\'s more efficient than "healing" an old one',
+      '`AGENTS.md` is your anchor — reloaded every session',
+
+    ],
+    sectionNumber: '02',
+    sectionTitle: 'Context',
+  },
+  { id: 16, type: 'section', number: '03', title: 'Building Agents' },
+  {
+    id: 17,
     type: 'content',
     title: 'Agent Architecture',
     content: 'Designing robust and reliable AI agents.',

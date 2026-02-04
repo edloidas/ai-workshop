@@ -305,8 +305,150 @@ const slides: SlideData[] = [
   },
   {
     id: 20,
+    type: 'content',
+    title: 'Agents vs IDE Chats',
+    content: [
+      'IDEs now have agent modes too — Copilot, Cursor, Windsurf. So why CLI?',
+      [
+        '**CLI runs anywhere**',
+        'Local machine, remote server, CI/CD pipeline, Docker container. Just use SSH, bro',
+      ],
+      [
+        '**CLI integrates with everything**',
+        'Shell scripts, automation pipelines, cron jobs, webhooks',
+      ],
+      [
+        '**CLI gets the investment**',
+        'Anthropic → Claude Code, OpenAI → Codex CLI',
+        'Latest models and first-party tools with cutting-edge features ship here first',
+        'IDEs catch up later, often with reduced capabilities',
+      ],
+      'IDE agents = convenience. CLI agents = power and flexibility',
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 21,
     type: 'agent-list',
     title: 'Agents We Will Explore',
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 22,
+    type: 'content',
+    title: 'OpenAI Codex',
+    content: [
+      "Codex comes in three flavors: **Web**, **CLI**, and **App** — we'll focus on the CLI",
+      [
+        '**The CLI**',
+        'Built in Rust — fast and stable',
+        'Works with your existing OpenAI subscription',
+      ],
+      [
+        '**Models**',
+        'GPT-5.2 and GPT-5.2 Codex available',
+        'Codex variants are fine-tuned for agentic workflows and tool use',
+      ],
+      [
+        '**GitHub integration**',
+        'Assign Codex to issues or mention in comments — like GitHub Copilot',
+      ],
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 23,
+    type: 'content',
+    title: 'Working with Codex',
+    content: [
+      [
+        '**Slower but smarter**',
+        'Tasks can take several minutes (40% faster recently, but still slow)',
+        'Trade speed for heavy reasoning and tough problems',
+      ],
+      [
+        '**Direct and literal**',
+        "Give specific instructions — it won't improvise",
+        'Great for backend work and code reviews',
+      ],
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 24,
+    type: 'content',
+    title: 'OpenCode',
+    content: [
+      'Open-source CLI agent with a **Vim-flavored**, IDE-in-terminal experience',
+      [
+        '**The Stack**',
+        'Written in TypeScript, runs on Bun (built in Zig)',
+        'Keyboard-driven UI — smooth and fast, but no mouse support',
+      ],
+      [
+        '**Models**',
+        'Free Chinese models: Kimi K2.5, GLM 4.7',
+        'Works with OpenAI subscription or Copilot — *not* Anthropic (API only)',
+      ],
+      [
+        '**GitHub integration**',
+        'Can mention `/opencode` or `/oc` in issues and PRs, but clunky DX',
+        '[Workflows](https://opencode.ai/docs/github/) are the recommended approach',
+      ],
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 25,
+    type: 'content',
+    title: 'Claude Code',
+    content: [
+      'The **first CLI agent** — launched January 2025, set the standard for the category',
+      [
+        '**The Stack**',
+        'Closed-source, written in TypeScript, runs on Bun',
+        'Native to terminal — works great with hotkeys *and* mouse',
+      ],
+      [
+        '**Models**',
+        'Currently supports Anthropic models only',
+        'Can hack to use other providers via OpenRouter API',
+      ],
+      [
+        '**The Apple Strategy**',
+        'Anthropic locks you into their ecosystem with top-notch integrations',
+        'Claude Desktop, Claude Code, plugins, API — everything works together seamlessly',
+      ],
+    ],
+    sectionNumber: '03',
+    sectionTitle: 'Agents',
+  },
+  {
+    id: 26,
+    type: 'content',
+    title: 'Working with Claude Code',
+    content: [
+      [
+        '**Opus 4.5 — the daily driver**',
+        'SOTA across the board — fast, smart, reliable',
+        'Not #1 in every benchmark, but consistently excellent everywhere',
+      ],
+      [
+        '**Does extra work**',
+        'Tends to anticipate needs — you can be less specific with instructions',
+        'More *human* in conversation, better at following complex instructions',
+      ],
+      [
+        '**Anthropic subscription perks**',
+        'Access to Claude Desktop, Projects, MCP servers, and more',
+        'One subscription covers chat, API credits, and agent usage',
+      ],
+    ],
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },

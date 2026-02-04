@@ -1,17 +1,17 @@
-import {AnimatePresence} from 'framer-motion';
-import {useCallback, useState} from 'react';
-import {NavDots} from './components/NavDots';
-import {ProgressBar} from './components/ProgressBar';
-import {SlideCounter} from './components/SlideCounter';
-import {ContentSlide} from './components/slides/ContentSlide';
-import {ContextGraphSlide} from './components/slides/ContextGraphSlide';
-import {CoverSlide} from './components/slides/CoverSlide';
-import {ImageSlide} from './components/slides/ImageSlide';
-import {LLMDemoSlide} from './components/slides/LLMDemoSlide';
-import {LostMiddleSlide} from './components/slides/LostMiddleSlide';
-import {SectionSlide} from './components/slides/SectionSlide';
-import {TokenizerSlide} from './components/slides/TokenizerSlide';
-import {useSlideNavigation} from './hooks/useSlideNavigation';
+import { AnimatePresence } from 'framer-motion';
+import { useCallback, useState } from 'react';
+import { NavDots } from './components/NavDots';
+import { ProgressBar } from './components/ProgressBar';
+import { SlideCounter } from './components/SlideCounter';
+import { ContentSlide } from './components/slides/ContentSlide';
+import { ContextGraphSlide } from './components/slides/ContextGraphSlide';
+import { CoverSlide } from './components/slides/CoverSlide';
+import { ImageSlide } from './components/slides/ImageSlide';
+import { LLMDemoSlide } from './components/slides/LLMDemoSlide';
+import { LostMiddleSlide } from './components/slides/LostMiddleSlide';
+import { SectionSlide } from './components/slides/SectionSlide';
+import { TokenizerSlide } from './components/slides/TokenizerSlide';
+import { useSlideNavigation } from './hooks/useSlideNavigation';
 
 type ContentItem = string | string[];
 type SlideContent = string | ContentItem[];
@@ -111,13 +111,34 @@ const slides: SlideData[] = [
   },
   {
     id: 7,
+    type: 'content',
+    title: 'Sycophancy',
+    content: [
+      'Model trained to be helpful → tends to agree, even when wrong',
+      [
+        '**Why it happens**',
+        'RLHF: humans prefer confirming answers → model learns to please',
+        'Training data: assistants agree and help, rarely argue',
+      ],
+      [
+        '**Practical solutions**',
+        '❌ *"Is this correct?"* → ✅ *"Find problems in this code"*',
+        'Ask for criticism: *"Act as strict reviewer. Find at least 3 issues"*',
+        'Devil\'s advocate: *"Argue why this solution is bad"*',
+      ],
+    ],
+    sectionNumber: '01',
+    sectionTitle: 'Foundations',
+  },
+  {
+    id: 8,
     type: 'tokenizer',
     title: 'Token Counter',
     sectionNumber: '01',
     sectionTitle: 'Foundations',
   },
   {
-    id: 8,
+    id: 9,
     type: 'content',
     title: 'Key Takeaway',
     content: [
@@ -128,16 +149,16 @@ const slides: SlideData[] = [
     sectionNumber: '01',
     sectionTitle: 'Foundations',
   },
-  { id: 9, type: 'section', number: '02', title: 'Context' },
+  { id: 10, type: 'section', number: '02', title: 'Context' },
   {
-    id: 10,
+    id: 11,
     type: 'context-graph',
     title: 'Context Window Comparison',
     sectionNumber: '02',
     sectionTitle: 'Context',
   },
   {
-    id: 11,
+    id: 12,
     type: 'content',
     title: 'Context Window Basics',
     content: [
@@ -163,14 +184,14 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 12,
+    id: 13,
     type: 'lost-middle',
     title: 'Lost in the Middle',
     sectionNumber: '02',
     sectionTitle: 'Context',
   },
   {
-    id: 13,
+    id: 14,
     type: 'content',
     title: 'Lost in the Middle',
     content: [
@@ -194,7 +215,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 14,
+    id: 15,
     type: 'content',
     title: 'Mitigation Strategies',
     content: [
@@ -213,7 +234,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 15,
+    id: 16,
     type: 'content',
     title: 'Context Rot',
     content: [
@@ -239,7 +260,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 16,
+    id: 17,
     type: 'content',
     title: 'Fighting Context Rot',
     content: [
@@ -252,16 +273,16 @@ const slides: SlideData[] = [
       '`AGENTS.md` is your anchor — reloaded every session',
     ],
     sectionNumber: '02',
-    sectionTitle: 'Agents',
+    sectionTitle: 'Context',
   },
-  { id: 17, type: 'section', number: '03', title: 'Building Agents' },
+  { id: 18, type: 'section', number: '03', title: 'Agents' },
   {
-    id: 18,
+    id: 19,
     type: 'content',
     title: 'Agent Architecture',
     content: 'Designing robust and reliable AI agents.',
     sectionNumber: '03',
-    sectionTitle: 'Building Agents',
+    sectionTitle: 'Agents',
   },
 ];
 

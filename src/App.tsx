@@ -6,6 +6,7 @@ import {SlideCounter} from './components/SlideCounter';
 import {ContentSlide} from './components/slides/ContentSlide';
 import {ContextGraphSlide} from './components/slides/ContextGraphSlide';
 import {CoverSlide} from './components/slides/CoverSlide';
+import {ImageSlide} from './components/slides/ImageSlide';
 import {LLMDemoSlide} from './components/slides/LLMDemoSlide';
 import {LostMiddleSlide} from './components/slides/LostMiddleSlide';
 import {SectionSlide} from './components/slides/SectionSlide';
@@ -41,6 +42,15 @@ type SlideData =
       title: string;
       sectionNumber?: string;
       sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'image';
+      title: string;
+      imageSrc: string;
+      imageAlt?: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
     };
 
 const slides: SlideData[] = [
@@ -74,12 +84,13 @@ const slides: SlideData[] = [
       [
         '**Hallucinations**',
         'Model generates *plausible continuation*, not verified facts',
-        'If `X wrote book Y` appeared often in training data, model outputs it confidently — even if wrong',
+        'If `X is Y` appeared often in training data, model outputs it confidently — even if wrong',
       ],
       [
         '**Chain-of-Thought works**',
-        'Thinking aloud produces intermediate tokens',
+        'Thinking aloud produces intermediate tokens, increasing quality on complex tasks',
         'These tokens become context, literally shifting the probability distribution',
+        'Reasoning Models — from prompt to built-in feature',
       ],
       [
         '**Format affects quality**',
@@ -92,13 +103,21 @@ const slides: SlideData[] = [
   },
   {
     id: 6,
+    type: 'image',
+    title: 'You are absolutely right',
+    imageSrc: '/images/joke-air.jpg',
+    sectionNumber: '01',
+    sectionTitle: 'Foundations',
+  },
+  {
+    id: 7,
     type: 'tokenizer',
     title: 'Token Counter',
     sectionNumber: '01',
     sectionTitle: 'Foundations',
   },
   {
-    id: 7,
+    id: 8,
     type: 'content',
     title: 'Key Takeaway',
     content: [
@@ -109,16 +128,16 @@ const slides: SlideData[] = [
     sectionNumber: '01',
     sectionTitle: 'Foundations',
   },
-  { id: 8, type: 'section', number: '02', title: 'Context' },
+  { id: 9, type: 'section', number: '02', title: 'Context' },
   {
-    id: 9,
+    id: 10,
     type: 'context-graph',
     title: 'Context Window Comparison',
     sectionNumber: '02',
     sectionTitle: 'Context',
   },
   {
-    id: 10,
+    id: 11,
     type: 'content',
     title: 'Context Window Basics',
     content: [
@@ -144,14 +163,14 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 11,
+    id: 12,
     type: 'lost-middle',
     title: 'Lost in the Middle',
     sectionNumber: '02',
     sectionTitle: 'Context',
   },
   {
-    id: 12,
+    id: 13,
     type: 'content',
     title: 'Lost in the Middle',
     content: [
@@ -175,7 +194,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 13,
+    id: 14,
     type: 'content',
     title: 'Mitigation Strategies',
     content: [
@@ -194,7 +213,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 14,
+    id: 15,
     type: 'content',
     title: 'Context Rot',
     content: [
@@ -220,7 +239,7 @@ const slides: SlideData[] = [
     sectionTitle: 'Context',
   },
   {
-    id: 15,
+    id: 16,
     type: 'content',
     title: 'Fighting Context Rot',
     content: [
@@ -231,14 +250,13 @@ const slides: SlideData[] = [
       ],
       'Don\'t fear starting over — sometimes it\'s more efficient than "healing" an old one',
       '`AGENTS.md` is your anchor — reloaded every session',
-
     ],
     sectionNumber: '02',
-    sectionTitle: 'Context',
+    sectionTitle: 'Agents',
   },
-  { id: 16, type: 'section', number: '03', title: 'Building Agents' },
+  { id: 17, type: 'section', number: '03', title: 'Building Agents' },
   {
-    id: 17,
+    id: 18,
     type: 'content',
     title: 'Agent Architecture',
     content: 'Designing robust and reliable AI agents.',
@@ -296,6 +314,17 @@ function renderSlide(slide: SlideData) {
         <LostMiddleSlide
           key={slide.id}
           title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'image':
+      return (
+        <ImageSlide
+          key={slide.id}
+          title={slide.title}
+          imageSrc={slide.imageSrc}
+          imageAlt={slide.imageAlt}
           sectionNumber={slide.sectionNumber}
           sectionTitle={slide.sectionTitle}
         />

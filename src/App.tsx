@@ -279,8 +279,19 @@ const slides: SlideData[] = [
   {
     id: 19,
     type: 'content',
-    title: 'Agent Architecture',
-    content: 'Designing robust and reliable AI agents.',
+    title: 'What is an Agent?',
+    content: [
+      'Chat answers questions. Agents *take actions* to achieve goals.',
+      '**Agent = Model + Tools + Orchestration Loop**',
+      [
+        '**The Loop**',
+        'User gives task → Model plans next step → Tool executes action',
+        'Result feeds back → Model decides next step → Repeat until done',
+      ],
+      'Tools = real side effects: files, terminals, APIs, databases',
+      'Guardrails: token budgets, step limits, approvals, sandboxing',
+      '**Mental model:** A careful junior dev with tools — works independently, you review the output',
+    ],
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },

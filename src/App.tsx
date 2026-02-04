@@ -4,12 +4,14 @@ import { NavDots } from './components/NavDots';
 import { ProgressBar } from './components/ProgressBar';
 import { SlideCounter } from './components/SlideCounter';
 import { AgentListSlide } from './components/slides/AgentListSlide';
+import { ClaudeHierarchySlide } from './components/slides/ClaudeHierarchySlide';
 import { ContentSlide } from './components/slides/ContentSlide';
 import { ContextGraphSlide } from './components/slides/ContextGraphSlide';
 import { CoverSlide } from './components/slides/CoverSlide';
 import { ImageSlide } from './components/slides/ImageSlide';
 import { LLMDemoSlide } from './components/slides/LLMDemoSlide';
 import { LostMiddleSlide } from './components/slides/LostMiddleSlide';
+import { SDDWorkflowSlide } from './components/slides/SDDWorkflowSlide';
 import { SectionSlide } from './components/slides/SectionSlide';
 import { SubscriptionValueSlide } from './components/slides/SubscriptionValueSlide';
 import { TokenizerSlide } from './components/slides/TokenizerSlide';
@@ -64,6 +66,20 @@ type SlideData =
   | {
       id: number;
       type: 'subscription-value';
+      title: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'claude-hierarchy';
+      title: string;
+      sectionNumber?: string;
+      sectionTitle?: string;
+    }
+  | {
+      id: number;
+      type: 'sdd-workflow';
       title: string;
       sectionNumber?: string;
       sectionTitle?: string;
@@ -488,13 +504,170 @@ const slides: SlideData[] = [
     sectionNumber: '03',
     sectionTitle: 'Agents',
   },
+  { id: 29, type: 'section', number: '04', title: 'Claude Code' },
   {
-    id: 29,
+    id: 30,
+    type: 'content',
+    title: 'CLAUDE.md',
+    content: [
+      'Loaded at the start of **every session** — your persistent instructions',
+      'Not documentation for humans — *instructions for the model*',
+      'Define: tech stack, conventions, forbidden patterns, project knowledge',
+      [
+        '**Why this matters**',
+        '**Consistency:** Every session starts with identical instructions',
+        '**No repetition:** No need to say *"use TypeScript strict"* every time',
+        '**Project context:** Model knows your codebase before the first question',
+      ],
+      [
+        '**Boris Cherny, creator of Claude Code:**',
+        '*"Invest in your CLAUDE.md. After every correction, end with: Update your CLAUDE.md so you don\'t make that mistake again."*',
+        '*"Claude is really good at writing rules for itself."*',
+      ],
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 31,
+    type: 'content',
+    title: 'CLAUDE.md in Practice',
+    content: [
+      '[AGENTS.md](https://agents.md/) — same principles work across Codex, OpenCode, Cursor, etc.',
+      [
+        '**Memory management**',
+        '`/memory` command — view and edit global and local memory',
+        '*"Add this to your memory"* — Claude updates its own instructions',
+      ],
+      [
+        '**Hierarchical loading**',
+        '`~/.claude/CLAUDE.md` — global, applies to all projects',
+        '`./CLAUDE.md` — project root, team-shared conventions',
+        '`./src/components/CLAUDE.md` — subfolder-specific, loaded when path is accessed',
+      ],
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 32,
+    type: 'claude-hierarchy',
+    title: 'Memory Files Hierarchy',
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 33,
+    type: 'content',
+    title: 'Skills',
+    content: [
+      '[agentskills.io](https://agentskills.io/home) — open format for agent capabilities',
+      '*"CLAUDE.md says here\'s what you need to know. Skills say here\'s how to do things."*',
+      [
+        '**Progressive disclosure**',
+        'Agent reads only `name` + `description` at startup',
+        'Full instructions load only when skill is activated',
+      ],
+      [
+        '**Where to store**',
+        '`~/.claude/skills/` — personal, for all projects',
+        '`.claude/skills/` — project-specific, shared via git',
+      ],
+      'Has a lot of built-in skills, can work with documents, images, etc.',
+      '*Ask Claude Code to create an HTML with all tools and skills available.*',
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 34,
+    type: 'content',
+    title: 'MCP (Model Context Protocol)',
+    content: [
+      'Open standard for connecting AI to external systems — like **USB-C for LLMs**',
+      [
+        '**Architecture**',
+        '`Host` (Claude Code) → `MCP Client` → `MCP Server` (GitHub, Slack, Postgres)',
+        'Servers provide **tools**, **resources**, and **prompts**',
+      ],
+      [
+        '**How it works**',
+        'At startup, Client discovers available tools via JSON Schema definitions',
+        'Claude sees *what* it can call and *with what parameters* — not the implementation',
+        'Tool calls go to server → results return to context',
+      ],
+      [
+        '**Loaded on demand**',
+        'Like Skills — only `name` + `description` loaded initially',
+        'Full tool definitions load when needed — no context pollution',
+      ],
+      '`context7` — recommended MCP for fetching up-to-date library documentation',
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 35,
+    type: 'content',
+    title: 'Pro Tips',
+    content: [
+      [
+        '**Work in Parallel**',
+        'Spin up 3–5 git worktrees, each with its own Claude session',
+        'Shell aliases (`za`, `zb`, `zc`) for instant switching between tasks',
+      ],
+      [
+        '**Plan Mode for Complex Tasks**',
+        'Pour energy into the plan → Claude 1-shots the implementation',
+        'When things go sideways, switch back to plan mode and re-plan',
+      ],
+      [
+        '**Terminal Setup**',
+        'Ghostty for rendering quality; `/statusline` for context & branch',
+        'Voice dictation (`fn` x2) — you speak 3x faster than you type',
+      ],
+      [
+        '**Use Subagents**',
+        '*"use subagents"* — throw more compute at hard problems',
+        'Offload tasks to keep your main context window clean',
+      ],
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 36,
+    type: 'content',
+    title: 'SDD — Spec Driven Development',
+    content: [
+      'A systematic approach to AI-assisted development that maximizes agent effectiveness',
+      [
+        '**Core Principle**',
+        'Write specifications *before* code — PRD, tasks, then implementation',
+        'Agents work best with clear context and atomic tasks',
+      ],
+      [
+        '**Why SDD works**',
+        'AI agents lack long-term memory — specs persist across sessions',
+        'Clear task boundaries prevent context rot and scope creep',
+        'Multiple AI tools excel at different phases (research vs implementation)',
+      ],
+    ],
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 37,
+    type: 'sdd-workflow',
+    title: 'SDD Workflow',
+    sectionNumber: '04',
+    sectionTitle: 'Claude Code',
+  },
+  {
+    id: 38,
     type: 'image',
     title: 'Questions?',
     imageSrc: '/images/joke-claude.png',
-    sectionNumber: '03',
-    sectionTitle: 'Agents',
   },
 ];
 
@@ -574,6 +747,24 @@ function renderSlide(slide: SlideData) {
     case 'subscription-value':
       return (
         <SubscriptionValueSlide
+          key={slide.id}
+          title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'claude-hierarchy':
+      return (
+        <ClaudeHierarchySlide
+          key={slide.id}
+          title={slide.title}
+          sectionNumber={slide.sectionNumber}
+          sectionTitle={slide.sectionTitle}
+        />
+      );
+    case 'sdd-workflow':
+      return (
+        <SDDWorkflowSlide
           key={slide.id}
           title={slide.title}
           sectionNumber={slide.sectionNumber}
